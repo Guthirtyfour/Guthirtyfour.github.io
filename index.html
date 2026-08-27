@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>你的名字 · 个人主页</title>
+<title>我的个人主页</title>
 <meta name="description" content="这是我的个人主页：关于我、我的作品与文章。">
 <style>
   :root {
@@ -58,6 +58,13 @@
     background: linear-gradient(135deg, #9db6cf 0%, #7B99B8 60%, #5E7D9C 100%);
     box-shadow: 0 4px 12px rgba(93, 122, 150, 0.25);
     user-select: none;
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
   .profile h1 {
@@ -185,6 +192,8 @@
 
   .work-card p { font-size: 13.8px; color: var(--ink); }
 
+  .work-card a { text-decoration: none; color: inherit; display: block; }
+
   /* ============ 联系 ============ */
   .contact-row {
     display: flex;
@@ -201,6 +210,8 @@
   }
 
   .contact-row a:hover { border-bottom-color: var(--accent-deep); }
+
+  .contact-row span { color: var(--ink-soft); }
 
   /* ============ 文章过滤 ============ */
   .filters {
@@ -291,17 +302,19 @@
 
   footer .made { margin-top: 4px; font-size: 12px; color: rgba(30, 36, 43, 0.35); }
 
-  /* ============ 占位提示 ============ */
-  .placeholder-note {
-    display: inline-block;
-    font-size: 11.5px;
-    color: var(--accent-deep);
-    background: rgba(155, 178, 202, 0.12);
-    border-radius: 999px;
-    padding: 2px 10px;
-    margin-left: 8px;
-    vertical-align: middle;
+  /* ============ 配置错误提示 ============ */
+  .config-error {
+    display: none;
+    background: #FDF3F0;
+    border: 1px solid #E8C4B8;
+    color: #A05A4A;
+    font-size: 13.5px;
+    border-radius: 2px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
   }
+
+  body.config-broken .config-error { display: block; }
 
   /* ============ 响应式 ============ */
   @media (max-width: 640px) {
@@ -316,11 +329,66 @@
 </head>
 <body>
 
+  <!-- ==========================================================
+       ⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️
+       下面是「内容修改区」：想改网站上的任何文字，只改这里！
+       每行后面的 // 是注释，帮助你理解，删掉也没关系。
+       注意：只能改引号『' 』里面的文字，引号本身、逗号、花括号不要动！
+       ⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️
+  ========================================================== -->
+<script>
+window.SITE = {
+  /* ---- 基本信息 ---- */
+  name: '你的名字',                      // ① 网站显示的名字（标题、页脚都会用到）
+  slogan: '这里放一句你的签名，比如：把生活过成自己喜欢的样子。',   // ② 名字下面那句话
+  avatarLetter: '我',                    // ③ 头像圆圈里的字（以后想放照片可以找我）
+
+  /* ---- 关于我 ---- */
+  about: '你好，我是你的名字。这里写一小段自我介绍：你是做什么的、喜欢什么、在关注什么。两三句话就好，让人快速认识你。',
+
+  /* ---- 精选作品（想加一个作品：复制一整组 { } 然后改内容）---- */
+  works: [
+    { no: '作品 01', title: '作品一：我的第一个项目', desc: '这里写这个作品是做什么的、你做了什么、有什么成果。', tags: ['标签一', '标签二'], link: '' },
+    { no: '作品 02', title: '作品二：喜欢的小东西', desc: '可以是摄影集、手工作品、小工具、写过的文章……', tags: ['标签一', '标签二'], link: '' },
+    { no: '作品 03', title: '作品三：正在进行的事', desc: '描述你最近在做的事情，让访客看到你一直在往前走。', tags: ['标签一'], link: '' },
+    { no: '作品 04', title: '作品四：留给未来的位置', desc: '先占个位置，等你的下一个作品诞生。', tags: ['敬请期待'], link: '' }
+  ],
+
+  /* ---- 联系方式（不需要的留空 ''，就不会显示）---- */
+  contacts: {
+    email: 'you@example.com',                     // 邮箱
+    wechat: 'your-wechat',                        // 微信号
+    github: 'https://github.com/Guthirtyfour',    // GitHub 主页链接
+    weibo: ''                                     // 微博（留空则不显示）
+  },
+
+  /* ---- 文章列表（想加一篇文章：复制一整组 { } 加到数组里）---- */
+  posts: [
+    { date: '2026.08.20', cats: ['随笔', '生活'], title: '第一篇占位文章：关于这个网站', excerpt: '这是我建网站的第一篇文章。这里会写我为什么搭建这个网站、想用它记录什么……', link: '' },
+    { date: '2026.08.15', cats: ['技术'], title: '我的第一个小工具是怎么做出来的', excerpt: '记录我从零开始做一个命令行小工具的完整过程：想法、踩坑、最终实现。', link: '' },
+    { date: '2026.08.02', cats: ['旅行', '生活'], title: '周末去了趟海边', excerpt: '随手拍了一些照片，记下海风和日落。生活里值得记录的瞬间，都可以写在这里。', link: '' },
+    { date: '2026.07.28', cats: ['生活', '随笔'], title: '最近在读的一本书', excerpt: '分享最近在看的书和一点读后感，慢慢把这里变成自己的小书房。', link: '' },
+    { date: '2026.07.10', cats: ['技术', '随笔'], title: '整理：我常用的几个网站和工具', excerpt: '把自己经常用的网站、软件、小工具整理成一篇清单，方便自己也分享给别人。', link: '' },
+    { date: '2026.06.18', cats: ['旅行'], title: '第一次一个人的短途旅行', excerpt: '一个人坐火车去了一个陌生的城市，记录一路上的见闻和心情。', link: '' }
+  ],
+
+  /* ---- 页脚 ---- */
+  footerNote: '保持简单，保持热爱。'       // 页脚那句小字
+};
+</script>
+<!-- ============ 内容修改区结束 ============ -->
+
+  <!-- 如果上面的内容改坏了，这里会显示提示 -->
+  <div class="config-error container" style="margin-top:24px;">
+    ⚠️ 检测到「内容修改区」可能出了小问题（比如少了引号或逗号），当前页面显示的是备份内容。
+    请检查修改区里引号（'）是否成对、逗号（,）是否完整，或把修改前的版本恢复回去。
+  </div>
+
   <!-- ========== 顶部个人区 ========== -->
   <header class="profile container">
-    <div class="avatar" aria-hidden="true">我</div>
-    <h1>你的名字</h1>
-    <p class="slogan">这里放一句你的签名，比如：把生活过成自己喜欢的样子。<span class="placeholder-note">占位</span></p>
+    <div class="avatar" id="avatar" aria-hidden="true">我</div>
+    <h1 id="siteName">你的名字</h1>
+    <p class="slogan" id="siteSlogan"></p>
   </header>
 
   <!-- ========== 导航 ========== -->
@@ -337,12 +405,8 @@
       <div class="container">
 
         <div class="card">
-          <h3>关于我 <span class="placeholder-note">占位</span></h3>
-          <p>
-            你好，我是你的名字。这里写一小段自我介绍：你是做什么的、喜欢什么、在关注什么。
-            两三句话就好，让人快速认识你。比如：一名热爱生活的普通青年，平时喜欢看书、拍照、
-            写点小东西，最近在折腾自己的网站。
-          </p>
+          <h3>关于我</h3>
+          <p id="aboutText"></p>
         </div>
 
         <div style="margin: 36px 0 20px;">
@@ -350,32 +414,7 @@
           <p class="section-sub">这里展示你最得意的几个作品或项目。</p>
         </div>
 
-        <div class="works">
-          <div class="work-card">
-            <div class="work-no">作品 01</div>
-            <h3>作品一：我的第一个项目</h3>
-            <p>这里写这个作品是做什么的、你做了什么、有什么成果。一两句话即可，点击卡片可以跳转到项目链接。</p>
-            <div class="tags"><span class="tag">标签一</span><span class="tag">标签二</span></div>
-          </div>
-          <div class="work-card">
-            <div class="work-no">作品 02</div>
-            <h3>作品二：喜欢的小东西</h3>
-            <p>可以是摄影集、手工作品、小工具、写过的文章……把你喜欢做的事情都放上来。</p>
-            <div class="tags"><span class="tag">标签一</span><span class="tag">标签二</span></div>
-          </div>
-          <div class="work-card">
-            <div class="work-no">作品 03</div>
-            <h3>作品三：正在进行的事</h3>
-            <p>描述你最近在做的事情，让访客看到你一直在往前走。</p>
-            <div class="tags"><span class="tag">标签一</span></div>
-          </div>
-          <div class="work-card">
-            <div class="work-no">作品 04</div>
-            <h3>作品四：留给未来的位置</h3>
-            <p>先占个位置，等你的下一个作品诞生。</p>
-            <div class="tags"><span class="tag">敬请期待</span></div>
-          </div>
-        </div>
+        <div class="works" id="worksGrid"></div>
 
         <div style="margin: 36px 0 20px;">
           <h2 class="section-title">联系我</h2>
@@ -383,12 +422,7 @@
         </div>
 
         <div class="card">
-          <div class="contact-row">
-            <a href="mailto:you@example.com">邮箱：you@example.com</a>
-            <span>微信：your-wechat</span>
-            <a href="#" onclick="return false;">GitHub</a>
-            <a href="#" onclick="return false;">微博</a>
-          </div>
+          <div class="contact-row" id="contactRow"></div>
         </div>
 
       </div>
@@ -400,62 +434,14 @@
 
         <div style="margin-bottom: 8px;">
           <h2 class="section-title">文章</h2>
-          <p class="section-sub">记录一些想法和日常。<span class="placeholder-note">以下均为占位示例</span></p>
+          <p class="section-sub" id="postsSub"></p>
         </div>
 
-        <div class="filters" id="filters">
-          <button class="filter-btn active" data-cat="all">全部</button>
-          <button class="filter-btn" data-cat="随笔">随笔</button>
-          <button class="filter-btn" data-cat="技术">技术</button>
-          <button class="filter-btn" data-cat="生活">生活</button>
-          <button class="filter-btn" data-cat="旅行">旅行</button>
-        </div>
+        <div class="filters" id="filters"></div>
 
-        <div id="post-list">
-          <article class="post-card" data-cats="随笔 生活">
-            <div class="post-meta"><span>2026.08.20</span><span>·</span><span>随笔</span></div>
-            <h3><a href="#" onclick="return false;">第一篇占位文章：关于这个网站</a></h3>
-            <p class="post-excerpt">这是我建网站的第一篇文章。这里会写我为什么搭建这个网站、想用它记录什么……</p>
-            <div class="tags"><span class="tag">随笔</span><span class="tag">生活</span></div>
-          </article>
+        <div id="postList"></div>
 
-          <article class="post-card" data-cats="技术">
-            <div class="post-meta"><span>2026.08.15</span><span>·</span><span>技术</span></div>
-            <h3><a href="#" onclick="return false;">我的第一个小工具是怎么做出来的</a></h3>
-            <p class="post-excerpt">记录我从零开始做一个命令行小工具的完整过程：想法、踩坑、最终实现。</p>
-            <div class="tags"><span class="tag">技术</span></div>
-          </article>
-
-          <article class="post-card" data-cats="旅行 生活">
-            <div class="post-meta"><span>2026.08.02</span><span>·</span><span>旅行</span></div>
-            <h3><a href="#" onclick="return false;">周末去了趟海边</a></h3>
-            <p class="post-excerpt">随手拍了一些照片，记下海风和日落。生活里值得记录的瞬间，都可以写在这里。</p>
-            <div class="tags"><span class="tag">旅行</span><span class="tag">生活</span></div>
-          </article>
-
-          <article class="post-card" data-cats="生活 随笔">
-            <div class="post-meta"><span>2026.07.28</span><span>·</span><span>生活</span></div>
-            <h3><a href="#" onclick="return false;">最近在读的一本书</a></h3>
-            <p class="post-excerpt">分享最近在看的书和一点读后感，慢慢把这里变成自己的小书房。</p>
-            <div class="tags"><span class="tag">生活</span><span class="tag">随笔</span></div>
-          </article>
-
-          <article class="post-card" data-cats="技术 随笔">
-            <div class="post-meta"><span>2026.07.10</span><span>·</span><span>技术</span></div>
-            <h3><a href="#" onclick="return false;">整理：我常用的几个网站和工具</a></h3>
-            <p class="post-excerpt">把自己经常用的网站、软件、小工具整理成一篇清单，方便自己也分享给别人。</p>
-            <div class="tags"><span class="tag">技术</span><span class="tag">随笔</span></div>
-          </article>
-
-          <article class="post-card" data-cats="旅行">
-            <div class="post-meta"><span>2026.06.18</span><span>·</span><span>旅行</span></div>
-            <h3><a href="#" onclick="return false;">第一次一个人的短途旅行</a></h3>
-            <p class="post-excerpt">一个人坐火车去了一个陌生的城市，记录一路上的见闻和心情。</p>
-            <div class="tags"><span class="tag">旅行</span></div>
-          </article>
-        </div>
-
-        <div class="post-empty" id="post-empty">这个分类下暂时还没有文章。</div>
+        <div class="post-empty" id="postEmpty">这个分类下暂时还没有文章。</div>
 
       </div>
     </section>
@@ -464,52 +450,160 @@
   <!-- ========== 页脚 ========== -->
   <footer>
     <div class="container">
-      <div>© 2026 你的名字</div>
-      <div class="made">保持简单，保持热爱。</div>
+      <div id="footerText"></div>
+      <div class="made" id="footerNote"></div>
     </div>
   </footer>
 
 <script>
-  // ===== 视图切换（首页 / 文章）=====
-  const navLinks = document.querySelectorAll('nav a[data-view]');
-  const views = document.querySelectorAll('.view');
+/* ========== 以下为网站程序部分，一般不需要改动 ========== */
 
-  function showView(name) {
-    views.forEach(v => v.classList.toggle('active', v.id === name));
-    navLinks.forEach(a => a.classList.toggle('active', a.dataset.view === name));
-    window.scrollTo({ top: 0 });
+// 备份内容：万一修改区出错，用备份顶上，保证网站不白屏
+var DEFAULT_SITE = {
+  name: '你的名字',
+  slogan: '这里放一句你的签名，比如：把生活过成自己喜欢的样子。',
+  avatarLetter: '我',
+  about: '你好，这是我的个人主页。',
+  works: [
+    { no: '作品 01', title: '作品一', desc: '描述……', tags: ['标签'], link: '' }
+  ],
+  contacts: { email: '', wechat: '', github: '', weibo: '' },
+  posts: [
+    { date: '2026.08.20', cats: ['随笔'], title: '占位文章', excerpt: '占位内容', link: '' }
+  ],
+  footerNote: ''
+};
+
+// 读取配置：如果修改区语法出错（SITE 不存在），就用备份，并显示提示
+var userSite = null;
+try {
+  userSite = window.SITE && window.SITE.name ? window.SITE : null;
+} catch (e) { userSite = null; }
+if (!userSite) {
+  userSite = DEFAULT_SITE;
+  document.body.classList.add('config-broken');
+}
+
+// 安全取值
+function val(v, def) { return (v === undefined || v === null || v === '') ? def : v; }
+
+// 填充基本信息
+document.getElementById('siteName').textContent = userSite.name || DEFAULT_SITE.name;
+document.title = (userSite.name || '我的主页') + ' · 个人主页';
+document.getElementById('siteSlogan').textContent = userSite.slogan || '';
+document.getElementById('aboutText').textContent = userSite.about || '';
+var avatar = document.getElementById('avatar');
+avatar.textContent = userSite.avatarLetter || '我';
+document.getElementById('footerText').textContent = '© 2026 ' + (userSite.name || '');
+document.getElementById('footerNote').textContent = userSite.footerNote || '';
+
+// 渲染作品
+var worksGrid = document.getElementById('worksGrid');
+(userSite.works || []).forEach(function (w) {
+  var card = document.createElement('div');
+  card.className = 'work-card';
+  var inner = '<div class="work-no">' + val(w.no, '作品') + '</div>'
+    + '<h3>' + val(w.title, '') + '</h3>'
+    + '<p>' + val(w.desc, '') + '</p>';
+  if (w.tags && w.tags.length) {
+    inner += '<div class="tags">' + w.tags.map(function (t) { return '<span class="tag">' + t + '</span>'; }).join('') + '</div>';
   }
+  if (w.link) {
+    card.innerHTML = '<a href="' + w.link + '" target="_blank" rel="noopener">' + inner + '</a>';
+  } else {
+    card.innerHTML = inner;
+  }
+  worksGrid.appendChild(card);
+});
 
-  navLinks.forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      showView(a.dataset.view);
-      history.replaceState(null, '', '#' + a.dataset.view);
+// 渲染联系方式
+var contactRow = document.getElementById('contactRow');
+var contacts = userSite.contacts || {};
+if (contacts.email) {
+  contactRow.innerHTML += '<a href="mailto:' + contacts.email + '">邮箱：' + contacts.email + '</a>';
+}
+if (contacts.wechat) {
+  contactRow.innerHTML += '<span>微信：' + contacts.wechat + '</span>';
+}
+if (contacts.github) {
+  contactRow.innerHTML += '<a href="' + contacts.github + '" target="_blank" rel="noopener">GitHub</a>';
+}
+if (contacts.weibo) {
+  contactRow.innerHTML += '<a href="' + contacts.weibo + '" target="_blank" rel="noopener">微博</a>';
+}
+
+// 渲染文章（按日期倒序）
+var posts = (userSite.posts || []).slice().sort(function (a, b) { return b.date.localeCompare(a.date); });
+var filters = document.getElementById('filters');
+var postList = document.getElementById('postList');
+var postEmpty = document.getElementById('postEmpty');
+
+// 收集所有分类
+var catSet = ['全部'];
+posts.forEach(function (p) { (p.cats || []).forEach(function (c) { if (catSet.indexOf(c) < 0) catSet.push(c); }); });
+
+// 生成分类按钮
+catSet.forEach(function (c, i) {
+  var btn = document.createElement('button');
+  btn.className = 'filter-btn' + (i === 0 ? ' active' : '');
+  btn.dataset.cat = c;
+  btn.textContent = c;
+  btn.addEventListener('click', function () {
+    var btns = filters.querySelectorAll('.filter-btn');
+    btns.forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var cat = btn.dataset.cat;
+    var visibleCount = 0;
+    var cards = postList.querySelectorAll('.post-card');
+    cards.forEach(function (card) {
+      var show = cat === '全部' || card.dataset.cats.split(' ').indexOf(cat) >= 0;
+      card.classList.toggle('hidden', !show);
+      if (show) visibleCount++;
     });
+    postEmpty.style.display = visibleCount === 0 ? 'block' : 'none';
   });
+  filters.appendChild(btn);
+});
 
-  // 支持直接访问 #posts
-  if (location.hash === '#posts') showView('posts');
+// 生成文章卡片
+posts.forEach(function (p) {
+  var card = document.createElement('article');
+  card.className = 'post-card';
+  card.dataset.cats = (p.cats || []).join(' ');
+  var catsText = (p.cats || []).join(' / ');
+  var title = val(p.title, '');
+  var titleHtml = p.link ? '<a href="' + p.link + '" target="_blank" rel="noopener">' + title + '</a>' : title;
+  var tagsHtml = (p.cats || []).map(function (t) { return '<span class="tag">' + t + '</span>'; }).join('');
+  card.innerHTML = '<div class="post-meta"><span>' + val(p.date, '') + '</span>'
+    + (catsText ? '<span>·</span><span>' + catsText + '</span>' : '')
+    + '</div>'
+    + '<h3>' + titleHtml + '</h3>'
+    + '<p class="post-excerpt">' + val(p.excerpt, '') + '</p>'
+    + (tagsHtml ? '<div class="tags">' + tagsHtml + '</div>' : '');
+  postList.appendChild(card);
+});
 
-  // ===== 文章分类过滤 =====
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const postCards = document.querySelectorAll('.post-card');
-  const postEmpty = document.getElementById('post-empty');
+document.getElementById('postsSub').textContent = posts.length > 0 ? '共 ' + posts.length + ' 篇，记录一些想法和日常。' : '';
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const cat = btn.dataset.cat;
-      let visibleCount = 0;
-      postCards.forEach(card => {
-        const show = cat === 'all' || card.dataset.cats.split(' ').includes(cat);
-        card.classList.toggle('hidden', !show);
-        if (show) visibleCount++;
-      });
-      postEmpty.style.display = visibleCount === 0 ? 'block' : 'none';
-    });
+/* ========== 视图切换（首页 / 文章） ========== */
+var navLinks = document.querySelectorAll('nav a[data-view]');
+var views = document.querySelectorAll('.view');
+
+function showView(name) {
+  views.forEach(function (v) { v.classList.toggle('active', v.id === name); });
+  navLinks.forEach(function (a) { a.classList.toggle('active', a.dataset.view === name); });
+  window.scrollTo({ top: 0 });
+}
+
+navLinks.forEach(function (a) {
+  a.addEventListener('click', function (e) {
+    e.preventDefault();
+    showView(a.dataset.view);
+    history.replaceState(null, '', '#' + a.dataset.view);
   });
+});
+
+if (location.hash === '#posts') showView('posts');
 </script>
 </body>
 </html>
