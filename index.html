@@ -317,6 +317,54 @@
 
   body.config-broken .config-error { display: block; }
 
+  /* ============ 站内详情页 ============ */
+  .back-btn {
+    font-family: inherit;
+    font-size: 13.5px;
+    color: var(--accent-deep);
+    background: transparent;
+    border: 1px solid rgba(110, 138, 14, 0.35);
+    border-radius: 999px;
+    padding: 6px 18px;
+    cursor: pointer;
+    margin-bottom: 18px;
+    transition: all .18s ease;
+  }
+
+  .back-btn:hover { background: rgba(143, 174, 20, 0.1); }
+
+  .detail-card h2 {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink-strong);
+    margin-bottom: 8px;
+  }
+
+  .detail-card .post-meta { margin-bottom: 16px; }
+
+  #detailBody p { margin-bottom: 14px; font-size: 15px; }
+
+  .detail-foot {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .detail-link {
+    font-size: 13.5px;
+    color: var(--accent-deep);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(110, 138, 14, 0.35);
+  }
+
+  .detail-link:hover { border-bottom-color: var(--accent-deep); }
+
+  .post-card { cursor: pointer; }
+
   /* ============ 响应式 ============ */
   @media (max-width: 640px) {
     .profile { padding: 44px 0 28px; }
@@ -348,12 +396,17 @@ window.SITE = {
   /* ---- 关于我 ---- */
   about: '你好，我是你的名字。这里写一小段自我介绍：你是做什么的、喜欢什么、在关注什么。两三句话就好，让人快速认识你。',
 
-  /* ---- 精选作品（想加一个作品：复制一整组 { } 然后改内容）---- */
+  /* ---- 精选作品 ----
+     每个作品有两个可选字段：
+     content：站内详情正文（想在网站内打开介绍页就填这里，用 \n 换行分段）
+     link：外部网址（不填 content 时，点卡片直接跳转到这个网址）
+     两个都填：点开站内详情，详情页里会出现「打开外部链接」按钮
+  ---- */
   works: [
-    { no: '作品 01', title: '作品一：我的第一个项目', desc: '这里写这个作品是做什么的、你做了什么、有什么成果。', tags: ['标签一', '标签二'], link: '' },
-    { no: '作品 02', title: '作品二：喜欢的小东西', desc: '可以是摄影集、手工作品、小工具、写过的文章……', tags: ['标签一', '标签二'], link: '' },
-    { no: '作品 03', title: '作品三：正在进行的事', desc: '描述你最近在做的事情，让访客看到你一直在往前走。', tags: ['标签一'], link: '' },
-    { no: '作品 04', title: '作品四：留给未来的位置', desc: '先占个位置，等你的下一个作品诞生。', tags: ['敬请期待'], link: '' }
+    { no: '作品 01', title: '作品一：我的第一个项目', desc: '这里写这个作品是做什么的、你做了什么、有什么成果。', tags: ['标签一', '标签二'], link: '', content: '这是作品一的详细介绍页面。\n\n在这里写这个作品的完整故事：为什么做它、怎么做的、有什么收获。\n\n写完保存后，点卡片就能在这个页面里阅读了。' },
+    { no: '作品 02', title: '作品二：喜欢的小东西', desc: '可以是摄影集、手工作品、小工具、写过的文章……', tags: ['标签一', '标签二'], link: '', content: '' },
+    { no: '作品 03', title: '作品三：正在进行的事', desc: '描述你最近在做的事情，让访客看到你一直在往前走。', tags: ['标签一'], link: '', content: '' },
+    { no: '作品 04', title: '作品四：留给未来的位置', desc: '先占个位置，等你的下一个作品诞生。', tags: ['敬请期待'], link: '', content: '' }
   ],
 
   /* ---- 联系方式（不需要的留空 ''，就不会显示）---- */
@@ -364,14 +417,17 @@ window.SITE = {
     weibo: ''                                     // 微博（留空则不显示）
   },
 
-  /* ---- 文章列表（想加一篇文章：复制一整组 { } 加到数组里）---- */
+  /* ---- 文章列表 ----
+     content：文章正文（想在站内直接阅读就填这里，用 \n 换行分段）
+     link：外部网址（不填 content 时，点文章跳转到外部网址）
+  ---- */
   posts: [
-    { date: '2026.08.20', cats: ['随笔', '生活'], title: '第一篇占位文章：关于这个网站', excerpt: '这是我建网站的第一篇文章。这里会写我为什么搭建这个网站、想用它记录什么……', link: '' },
-    { date: '2026.08.15', cats: ['技术'], title: '我的第一个小工具是怎么做出来的', excerpt: '记录我从零开始做一个命令行小工具的完整过程：想法、踩坑、最终实现。', link: '' },
-    { date: '2026.08.02', cats: ['旅行', '生活'], title: '周末去了趟海边', excerpt: '随手拍了一些照片，记下海风和日落。生活里值得记录的瞬间，都可以写在这里。', link: '' },
-    { date: '2026.07.28', cats: ['生活', '随笔'], title: '最近在读的一本书', excerpt: '分享最近在看的书和一点读后感，慢慢把这里变成自己的小书房。', link: '' },
-    { date: '2026.07.10', cats: ['技术', '随笔'], title: '整理：我常用的几个网站和工具', excerpt: '把自己经常用的网站、软件、小工具整理成一篇清单，方便自己也分享给别人。', link: '' },
-    { date: '2026.06.18', cats: ['旅行'], title: '第一次一个人的短途旅行', excerpt: '一个人坐火车去了一个陌生的城市，记录一路上的见闻和心情。', link: '' }
+    { date: '2026.08.20', cats: ['随笔', '生活'], title: '第一篇占位文章：关于这个网站', excerpt: '这是我建网站的第一篇文章。这里会写我为什么搭建这个网站、想用它记录什么……', link: '', content: '欢迎来到我的小网站。\n\n这是我的第一篇占位文章。以后想发文章，只需要在配置区把这一组内容复制一份，填上日期、分类、标题、摘要和正文，保存后就会出现在文章列表里。\n\n点一下文章卡片，就能像现在这样在网站内阅读正文——这就是站内阅读模式。' },
+    { date: '2026.08.15', cats: ['技术'], title: '我的第一个小工具是怎么做出来的', excerpt: '记录我从零开始做一个命令行小工具的完整过程：想法、踩坑、最终实现。', link: '', content: '' },
+    { date: '2026.08.02', cats: ['旅行', '生活'], title: '周末去了趟海边', excerpt: '随手拍了一些照片，记下海风和日落。生活里值得记录的瞬间，都可以写在这里。', link: '', content: '' },
+    { date: '2026.07.28', cats: ['生活', '随笔'], title: '最近在读的一本书', excerpt: '分享最近在看的书和一点读后感，慢慢把这里变成自己的小书房。', link: '', content: '' },
+    { date: '2026.07.10', cats: ['技术', '随笔'], title: '整理：我常用的几个网站和工具', excerpt: '把自己经常用的网站、软件、小工具整理成一篇清单，方便自己也分享给别人。', link: '', content: '' },
+    { date: '2026.06.18', cats: ['旅行'], title: '第一次一个人的短途旅行', excerpt: '一个人坐火车去了一个陌生的城市，记录一路上的见闻和心情。', link: '', content: '' }
   ],
 
   /* ---- 页脚 ---- */
@@ -447,6 +503,22 @@ window.SITE = {
 
       </div>
     </section>
+
+    <!-- ========== 站内详情页（点作品/文章后在这里打开） ========== -->
+    <section class="view" id="detail">
+      <div class="container">
+        <button class="back-btn" id="backBtn" type="button">← 返回</button>
+        <article class="card detail-card">
+          <h2 id="detailTitle"></h2>
+          <div class="post-meta" id="detailMeta"></div>
+          <div id="detailBody"></div>
+          <div class="detail-foot">
+            <div class="tags" id="detailTags"></div>
+            <a class="detail-link" id="detailLink" href="#" target="_blank" rel="noopener" style="display:none;">打开外部链接 ↗</a>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
 
   <!-- ========== 页脚 ========== -->
@@ -519,7 +591,7 @@ avatarImg.onerror = function () {
 document.getElementById('footerText').textContent = '© 2026 ' + (userSite.name || '');
 document.getElementById('footerNote').textContent = userSite.footerNote || '';
 
-// 渲染作品
+// 渲染作品（点击卡片：有 content 站内打开详情，有 link 跳外链，都没有则不可点）
 var worksGrid = document.getElementById('worksGrid');
 (userSite.works || []).forEach(function (w) {
   var card = document.createElement('div');
@@ -530,10 +602,14 @@ var worksGrid = document.getElementById('worksGrid');
   if (w.tags && w.tags.length) {
     inner += '<div class="tags">' + w.tags.map(function (t) { return '<span class="tag">' + t + '</span>'; }).join('') + '</div>';
   }
-  if (w.link) {
-    card.innerHTML = '<a href="' + w.link + '" target="_blank" rel="noopener">' + inner + '</a>';
+  card.innerHTML = inner;
+  if (w.content || w.link) {
+    card.addEventListener('click', function () {
+      if (w.content) { openDetail(w); }
+      else if (w.link) { window.open(w.link, '_blank', 'noopener'); }
+    });
   } else {
-    card.innerHTML = inner;
+    card.style.cursor = 'default';
   }
   worksGrid.appendChild(card);
 });
@@ -587,21 +663,25 @@ catSet.forEach(function (c, i) {
   filters.appendChild(btn);
 });
 
-// 生成文章卡片
+// 生成文章卡片（点击卡片：有 content 站内阅读，有 link 跳外链）
 posts.forEach(function (p) {
   var card = document.createElement('article');
   card.className = 'post-card';
   card.dataset.cats = (p.cats || []).join(' ');
   var catsText = (p.cats || []).join(' / ');
-  var title = val(p.title, '');
-  var titleHtml = p.link ? '<a href="' + p.link + '" target="_blank" rel="noopener">' + title + '</a>' : title;
   var tagsHtml = (p.cats || []).map(function (t) { return '<span class="tag">' + t + '</span>'; }).join('');
   card.innerHTML = '<div class="post-meta"><span>' + val(p.date, '') + '</span>'
     + (catsText ? '<span>·</span><span>' + catsText + '</span>' : '')
     + '</div>'
-    + '<h3>' + titleHtml + '</h3>'
+    + '<h3>' + val(p.title, '') + '</h3>'
     + '<p class="post-excerpt">' + val(p.excerpt, '') + '</p>'
     + (tagsHtml ? '<div class="tags">' + tagsHtml + '</div>' : '');
+  if (p.content || p.link) {
+    card.addEventListener('click', function () {
+      if (p.content) { openDetail(p); }
+      else if (p.link) { window.open(p.link, '_blank', 'noopener'); }
+    });
+  }
   postList.appendChild(card);
 });
 
@@ -612,10 +692,68 @@ var navLinks = document.querySelectorAll('nav a[data-view]');
 var views = document.querySelectorAll('.view');
 
 function showView(name) {
+  document.getElementById('detail').classList.remove('active');
   views.forEach(function (v) { v.classList.toggle('active', v.id === name); });
   navLinks.forEach(function (a) { a.classList.toggle('active', a.dataset.view === name); });
   window.scrollTo({ top: 0 });
 }
+
+
+/* ========== 站内详情（点作品/文章后站内阅读） ========== */
+var detailFrom = null;   // 记住从哪个页面进来的，返回时回去
+
+function renderDetail(item) {
+  document.getElementById('detailTitle').textContent = val(item.title, '');
+  var meta = document.getElementById('detailMeta');
+  meta.innerHTML = '';
+  var catsText = (item.cats || []).join(' / ');
+  if (item.date) meta.innerHTML += '<span>' + item.date + '</span>';
+  if (catsText) meta.innerHTML += '<span>·</span><span>' + catsText + '</span>';
+  var body = document.getElementById('detailBody');
+  body.innerHTML = '';
+  var content = item.content || [];
+  if (typeof content === 'string') { content = content.split('\n'); }
+  content.forEach(function (para) {
+    if (!para.trim()) { return; }
+    var p = document.createElement('p');
+    p.textContent = para;
+    body.appendChild(p);
+  });
+  var tagsEl = document.getElementById('detailTags');
+  tagsEl.innerHTML = '';
+  (item.tags || item.cats || []).forEach(function (t) {
+    var s = document.createElement('span');
+    s.className = 'tag';
+    s.textContent = t;
+    tagsEl.appendChild(s);
+  });
+  var linkEl = document.getElementById('detailLink');
+  if (item.link) {
+    linkEl.href = item.link;
+    linkEl.style.display = 'inline-block';
+  } else {
+    linkEl.style.display = 'none';
+  }
+}
+
+function openDetail(item) {
+  detailFrom = document.querySelector('.view.active');
+  if (detailFrom) { detailFrom.classList.remove('active'); }
+  var detail = document.getElementById('detail');
+  renderDetail(item);
+  detail.classList.add('active');
+  navLinks.forEach(function (a) { a.classList.remove('active'); });
+  window.scrollTo({ top: 0 });
+}
+
+document.getElementById('backBtn').addEventListener('click', function () {
+  document.getElementById('detail').classList.remove('active');
+  if (detailFrom) { detailFrom.classList.add('active'); }
+  if (detailFrom) {
+    navLinks.forEach(function (a) { a.classList.toggle('active', a.dataset.view === detailFrom.id); });
+  }
+  window.scrollTo({ top: 0 });
+});
 
 navLinks.forEach(function (a) {
   a.addEventListener('click', function (e) {
