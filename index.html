@@ -389,7 +389,16 @@
 window.SITE = {
   /* ---- 基本信息 ---- */
   name: '咕叁肆Guthirtyfour',                      // ① 网站显示的名字（标题、页脚都会用到）
-  slogan: '这世界就是一个巨大的跳蛋，适应它的人活得又爽又滋润，不适应的就是痛，感觉身体有异物感，活的很难受很想死。',   // ② 名字下面那句话
+  /* ---- 签名轮换 ----
+     下面方括号里每一行是一句签名，每次打开网站随机显示其中一句。
+     想加句子：在方括号里加一行 '你的句子', 即可
+  ---- */
+  slogans: [
+    '这世界就是一个巨大的跳蛋，适应它的人活得又爽又滋润，不适应的就是痛，感觉身体有异物感，活的很难受很想死。',
+    '把生活过成自己喜欢的样子。',
+    '保持简单，保持热爱。',
+    '今天也要加油鸭。'
+  ],   // ② 名字下面那句话（随机轮换）
   avatarLetter: '我',                    // ③ 头像圆圈里的字（仅当没有 avatar.jpg 图片时显示）
   /* 换头像方法：把新头像图片命名为 avatar.jpg 上传到仓库覆盖旧文件即可，无需改这里 */
 
@@ -539,7 +548,7 @@ var AVATAR_DATA = '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwQDAwQEBAQFBQQFBwsHBwYGB
 // 备份内容：万一修改区出错，用备份顶上，保证网站不白屏
 var DEFAULT_SITE = {
   name: '你的名字',
-  slogan: '这里放一句你的签名，比如：把生活过成自己喜欢的样子。',
+  slogans: ['这里放一句你的签名。'],
   avatarLetter: '我',
   about: '你好，这是我的个人主页。',
   works: [
@@ -568,7 +577,10 @@ function val(v, def) { return (v === undefined || v === null || v === '') ? def 
 // 填充基本信息
 document.getElementById('siteName').textContent = userSite.name || DEFAULT_SITE.name;
 document.title = (userSite.name || '我的主页') + ' · 个人主页';
-document.getElementById('siteSlogan').textContent = userSite.slogan || '';
+// 随机签名：从 slogans 列表随机取一句（兼容旧的单句 slogan 字段）
+var sloganList = userSite.slogans || [];
+if (!sloganList.length) { sloganList = [userSite.slogan || '']; }
+document.getElementById('siteSlogan').textContent = sloganList[Math.floor(Math.random() * sloganList.length)] || '';
 document.getElementById('aboutText').textContent = userSite.about || '';
 var avatar = document.getElementById('avatar');
 
