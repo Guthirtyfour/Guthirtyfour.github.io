@@ -363,6 +363,25 @@
 
   .detail-link:hover { border-bottom-color: var(--accent-deep); }
 
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13.5px;
+    color: #fff;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    padding: 6px 18px;
+    text-decoration: none;
+    transition: all .18s ease;
+  }
+
+  .download-btn:hover {
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+  }
+
   .post-card { cursor: pointer; }
 
   /* ============ 站内长文（article）样式 ============ */
@@ -528,10 +547,13 @@ window.SITE = {
 
   /* ---- 文章列表 ----
      content：文章正文（想在站内直接阅读就填这里，用 \n 换行分段）
+     article：站内长文模板 id（由 AI 生成的长文章）
      link：外部网址（不填 content 时，点文章跳转到外部网址）
+     download：文件下载地址（如 'downloads/anatomy-notes.docx'，阅读页会显示下载按钮）
+     downloadName：下载后显示的文件名（如 '解剖学笔记大全.docx'）
   ---- */
   posts: [
-    { date: '2026.09.23', cats: ['技术'], title: '解剖学笔记大全', excerpt: '系统整理的人体解剖学笔记：运动系统、关节、颅骨、肌肉、内脏、心血管等，含 41 张解剖图。', link: '', article: 'essay-anatomy', content: '' },
+    { date: '2026.09.23', cats: ['技术'], title: '解剖学笔记大全', excerpt: '系统整理的人体解剖学笔记：运动系统、关节、颅骨、肌肉、内脏、心血管等，含 41 张解剖图。', link: '', article: 'essay-anatomy', content: '', download: 'downloads/anatomy-notes.docx', downloadName: '解剖学笔记大全.docx' },
     { date: '2026.09.22', cats: ['随笔'], title: '野生狗奶的数学本体论', excerpt: '从「保质期：永久」到绝对无穷的七命题研究——以网络迷因为对象的数学本体论论证。', link: '', article: 'essay-dog-milk', content: '' },
     { date: '2026.08.20', cats: ['随笔', '生活'], title: '第一篇占位文章：关于这个网站', excerpt: '这是我建网站的第一篇文章。这里会写我为什么搭建这个网站、想用它记录什么……', link: '', content: '欢迎来到我的小网站。\n\n这是我的第一篇占位文章。以后想发文章，只需要在配置区把这一组内容复制一份，填上日期、分类、标题、摘要和正文，保存后就会出现在文章列表里。\n\n点一下文章卡片，就能像现在这样在网站内阅读正文——这就是站内阅读模式。' },
     { date: '2026.08.15', cats: ['技术'], title: '我的第一个小工具是怎么做出来的', excerpt: '记录我从零开始做一个命令行小工具的完整过程：想法、踩坑、最终实现。', link: '', content: '' },
@@ -626,6 +648,7 @@ window.SITE = {
           <div class="detail-foot">
             <div class="tags" id="detailTags"></div>
             <a class="detail-link" id="detailLink" href="#" target="_blank" rel="noopener" style="display:none;">打开外部链接 ↗</a>
+            <a class="download-btn" id="detailDownload" href="#" style="display:none;">⬇ 下载文件</a>
           </div>
         </article>
       </div>
@@ -857,6 +880,15 @@ function renderDetail(item) {
     linkEl.style.display = 'inline-block';
   } else {
     linkEl.style.display = 'none';
+  }
+  /* 文件下载按钮（download 字段） */
+  var dlEl = document.getElementById('detailDownload');
+  if (item.download) {
+    dlEl.href = item.download;
+    if (item.downloadName) { dlEl.setAttribute('download', item.downloadName); }
+    dlEl.style.display = 'inline-flex';
+  } else {
+    dlEl.style.display = 'none';
   }
 }
 
