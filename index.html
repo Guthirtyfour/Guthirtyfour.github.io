@@ -214,6 +214,36 @@
 
   .contact-row span { color: var(--ink-soft); }
 
+  /* ============ 搜索框 ============ */
+  .search-box { margin-bottom: 18px; }
+
+  .search-box input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 14.5px;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 11px 22px;
+    outline: none;
+    transition: border-color .18s ease, box-shadow .18s ease;
+  }
+
+  .search-box input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(123, 143, 160, 0.12);
+  }
+
+  .search-box input::placeholder { color: var(--ink-soft); }
+
+  .search-count {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    min-height: 16px;
+  }
+
   /* ============ 文章过滤 ============ */
   .filters {
     display: flex;
@@ -548,7 +578,7 @@ window.SITE = {
      link：外部网址（以上都不填时，点卡片跳转到这个网址）
   ---- */
   works: [
-    { no: '作品 01', title: '野生狗奶的数学本体论', desc: '从「保质期：永久」到绝对无穷的七命题研究——以网络迷因为对象的数学本体论论证。', tags: ['数学', '野生狗奶'], link: '', article: 'dog-milk', content: '' },
+    { no: '作品 01', title: '野生狗奶的数学本体论', desc: '从「保质期：永久」到绝对无穷的七命题研究——以网络迷因为对象的数学本体论论证。', tags: ['数学', '野生狗奶'], link: '', article: 'dog-milk', content: '', download: 'downloads/dog-milk-paper.docx', downloadName: '野生狗奶的数学本体论.docx' },
     { no: '作品 02', title: '作品二：喜欢的小东西', desc: '可以是摄影集、手工作品、小工具、写过的文章……', tags: ['标签一', '标签二'], link: '', content: '' },
     { no: '作品 03', title: '作品三：正在进行的事', desc: '描述你最近在做的事情，让访客看到你一直在往前走。', tags: ['标签一'], link: '', content: '' },
     { no: '作品 04', title: '作品四：留给未来的位置', desc: '先占个位置，等你的下一个作品诞生。', tags: ['敬请期待'], link: '', content: '' }
@@ -566,12 +596,14 @@ window.SITE = {
      content：文章正文（想在站内直接阅读就填这里，用 \n 换行分段）
      article：站内长文数据名（对应 articles/ 文件夹里的同名 .js 文件，由 AI 生成）
      link：外部网址（不填 content 时，点文章跳转到外部网址）
-     download：文件下载地址（如 'downloads/anatomy-notes.docx'，阅读页会显示下载按钮）
+     download：文件下载地址（如 'downloads/anatomy-notes.docx'，阅读页标题旁会显示下载按钮）
      downloadName：下载后显示的文件名（如 '解剖学笔记大全.docx'）
+     ※ 规则：每篇长文都要配 Word 下载按钮，文件统一放 downloads/ 文件夹
   ---- */
   posts: [
+    { date: '2026.09.23', cats: ['技术'], title: '中医基础理论笔记大全', excerpt: '系统整理的中医基础理论笔记：四大经典、阴阳五行、藏象学说、经络、病因病机、治则治法，含 31 张图表。', link: '', article: 'tcm', content: '', download: 'downloads/tcm-notes.docx', downloadName: '中医基础理论笔记大全.docx' },
     { date: '2026.09.23', cats: ['技术'], title: '解剖学笔记大全', excerpt: '系统整理的人体解剖学笔记：运动系统、关节、颅骨、肌肉、内脏、心血管等，含 41 张解剖图。', link: '', article: 'anatomy', content: '', download: 'downloads/anatomy-notes.docx', downloadName: '解剖学笔记大全.docx' },
-    { date: '2026.09.22', cats: ['随笔'], title: '野生狗奶的数学本体论', excerpt: '从「保质期：永久」到绝对无穷的七命题研究——以网络迷因为对象的数学本体论论证。', link: '', article: 'dog-milk', content: '' },
+    { date: '2026.09.22', cats: ['随笔'], title: '野生狗奶的数学本体论', excerpt: '从「保质期：永久」到绝对无穷的七命题研究——以网络迷因为对象的数学本体论论证。', link: '', article: 'dog-milk', content: '', download: 'downloads/dog-milk-paper.docx', downloadName: '野生狗奶的数学本体论.docx' },
     { date: '2026.08.20', cats: ['随笔', '生活'], title: '第一篇占位文章：关于这个网站', excerpt: '这是我建网站的第一篇文章。这里会写我为什么搭建这个网站、想用它记录什么……', link: '', content: '欢迎来到我的小网站。\n\n这是我的第一篇占位文章。以后想发文章，只需要在配置区把这一组内容复制一份，填上日期、分类、标题、摘要和正文，保存后就会出现在文章列表里。\n\n点一下文章卡片，就能像现在这样在网站内阅读正文——这就是站内阅读模式。' },
     { date: '2026.08.15', cats: ['技术'], title: '我的第一个小工具是怎么做出来的', excerpt: '记录我从零开始做一个命令行小工具的完整过程：想法、踩坑、最终实现。', link: '', content: '' },
     { date: '2026.08.02', cats: ['旅行', '生活'], title: '周末去了趟海边', excerpt: '随手拍了一些照片，记下海风和日落。生活里值得记录的瞬间，都可以写在这里。', link: '', content: '' },
@@ -643,6 +675,11 @@ window.SITE = {
         <div style="margin-bottom: 8px;">
           <h2 class="section-title">文章</h2>
           <p class="section-sub" id="postsSub"></p>
+        </div>
+
+        <div class="search-box">
+          <input type="search" id="searchInput" placeholder="🔍 搜索文章（标题、摘要、正文内容…）" autocomplete="off">
+          <div class="search-count" id="searchCount"></div>
         </div>
 
         <div class="filters" id="filters"></div>
@@ -832,6 +869,7 @@ posts.forEach(function (p) {
     + '<h3>' + val(p.title, '') + '</h3>'
     + '<p class="post-excerpt">' + val(p.excerpt, '') + '</p>'
     + (tagsHtml ? '<div class="tags">' + tagsHtml + '</div>' : '');
+  card._data = p;   /* 供搜索使用 */
   if (p.content || p.article || p.link) {
     card.addEventListener('click', function () {
       if (p.content || p.article) { openDetail(p); }
@@ -842,6 +880,75 @@ posts.forEach(function (p) {
 });
 
 document.getElementById('postsSub').textContent = posts.length > 0 ? '共 ' + posts.length + ' 篇，记录一些想法和日常。' : '';
+
+/* ========== 文章搜索 ========== */
+var searchInput = document.getElementById('searchInput');
+var searchCount = document.getElementById('searchCount');
+var allArticlesLoaded = false;
+
+/* 首次聚焦搜索框时，后台静默加载所有长文数据（用于全文搜索） */
+function preloadArticles() {
+  if (allArticlesLoaded) return;
+  var need = [];
+  (userSite.posts || []).forEach(function (p) {
+    if (p.article && !(window.ARTICLES && window.ARTICLES[p.article])) { need.push(p.article); }
+  });
+  if (!need.length) { allArticlesLoaded = true; return; }
+  var pending = need.length;
+  need.forEach(function (key) {
+    var sc = document.createElement('script');
+    sc.src = 'articles/' + key + '.js';
+    sc.onload = sc.onerror = function () {
+      pending--;
+      if (pending === 0) { allArticlesLoaded = true; runSearch(); }
+    };
+    document.head.appendChild(sc);
+  });
+}
+
+/* 判断某篇文章是否匹配关键词 */
+function articleMatches(item, q) {
+  var hay = (item.title || '') + ' ' + (item.excerpt || '') + ' ' + ((item.cats || []).join(' '));
+  if (item.article && window.ARTICLES && window.ARTICLES[item.article]) {
+    hay += ' ' + window.ARTICLES[item.article].replace(/<[^>]+>/g, ' ');
+  }
+  if (item.content) { hay += ' ' + item.content; }
+  return hay.toLowerCase().indexOf(q) >= 0;
+}
+
+/* 执行搜索 */
+function runSearch() {
+  var q = (searchInput.value || '').trim().toLowerCase();
+  var visible = 0;
+  var cards = postList.querySelectorAll('.post-card');
+  cards.forEach(function (card) {
+    var show = !q || articleMatches(card._data || {}, q);
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+  if (q) {
+    filters.querySelectorAll('.filter-btn').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.cat === '全部');
+    });
+    searchCount.textContent = '找到 ' + visible + ' 篇' + (allArticlesLoaded ? '' : ' · 正在加载全文…');
+    postEmpty.textContent = '没有找到匹配「' + searchInput.value.trim() + '」的文章。';
+    postEmpty.style.display = visible === 0 ? 'block' : 'none';
+  } else {
+    searchCount.textContent = '';
+    postEmpty.textContent = '这个分类下暂时还没有文章。';
+    postEmpty.style.display = 'none';
+    /* 恢复分类筛选状态（回到"全部"） */
+    filters.querySelectorAll('.filter-btn').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.cat === '全部');
+    });
+  }
+}
+
+searchInput.addEventListener('focus', preloadArticles);
+searchInput.addEventListener('input', function () {
+  preloadArticles();
+  runSearch();
+});
 
 /* ========== 视图切换（首页 / 文章） ========== */
 var navLinks = document.querySelectorAll('nav a[data-view]');
