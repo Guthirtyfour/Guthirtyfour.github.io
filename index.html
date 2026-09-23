@@ -333,6 +333,23 @@
 
   .back-btn:hover { background: rgba(143, 159, 172, 0.12); }
 
+  .detail-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .detail-title-row h2 { margin-bottom: 0; }
+
+  .download-btn {
+    flex-shrink: 0;
+    font-size: 13px;
+    padding: 5px 16px;
+  }
+
   .detail-card h2 {
     font-size: 22px;
     font-weight: 500;
@@ -367,12 +384,12 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-size: 13.5px;
+    font-size: 13px;
     color: #fff;
     background: var(--accent);
     border: 1px solid var(--accent);
     border-radius: 999px;
-    padding: 6px 18px;
+    padding: 5px 16px;
     text-decoration: none;
     transition: all .18s ease;
   }
@@ -642,13 +659,15 @@ window.SITE = {
       <div class="container">
         <button class="back-btn" id="backBtn" type="button">← 返回</button>
         <article class="card detail-card">
-          <h2 id="detailTitle"></h2>
+          <div class="detail-title-row">
+            <h2 id="detailTitle"></h2>
+            <a class="download-btn" id="detailDownload" href="#" style="display:none;">⬇ 下载文件</a>
+          </div>
           <div class="post-meta" id="detailMeta"></div>
           <div id="detailBody"></div>
           <div class="detail-foot">
             <div class="tags" id="detailTags"></div>
             <a class="detail-link" id="detailLink" href="#" target="_blank" rel="noopener" style="display:none;">打开外部链接 ↗</a>
-            <a class="download-btn" id="detailDownload" href="#" style="display:none;">⬇ 下载文件</a>
           </div>
         </article>
       </div>
